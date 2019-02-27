@@ -1,5 +1,6 @@
-import { Controller, Post } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { UserService } from '../../../common/user/user.service';
+import { UserCredentials } from '../../../common/user/user.credentials';
 
 @Controller('v1/user')
 export class UserController {
@@ -8,7 +9,7 @@ export class UserController {
   ) {}
 
   @Post('login')
-  login() {
-    return true;
+  login(@Body() user: UserCredentials) {
+    return this.userService.getUserToken(user);
   }
 }
